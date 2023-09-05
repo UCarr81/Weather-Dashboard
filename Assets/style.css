@@ -6,7 +6,8 @@
 }
 
 .navbar {
-    background: rgb(34,193,195);
+    background: 
+    rgb(34,193,195);
     background: linear-gradient(95deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
     margin: 0;
     padding: 15px;
@@ -19,7 +20,7 @@
 
 .search-input {
     padding: 8px;
-    
+    padding-right: 40px;
     margin: auto;
     margin-left: 10px;
 }
@@ -32,5 +33,13 @@
     color: white;
     border-radius: 5px;
     border: blue;
+}
 
+#cityBtn {
+    margin: 50px 0 0 10px;
+    padding: 0px 62px 0px 62px;
+    background-color: rgb(136, 136, 136);
+    font-size: x-large;
+    border-radius: 5px;
+    border: rgb(136, 136, 136)
 }
