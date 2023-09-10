@@ -14,32 +14,6 @@
     text-align: center;
 }
 
-.search-box {
-    font-size: x-large;
-}
-
-.search-input {
-    padding: 8px;
-    padding-right: 40px;
-    margin: auto;
-    margin-left: 10px;
-}
-
-.searchBtn {
-    display: flex;
-    margin: 10px 0 0 10px;
-    padding: 5px 90px 5px 90px;
-    background-color: blue;
-    color: white;
-    border-radius: 5px;
-    border: blue;
-}
-
-#cityBtn {
-    margin: 50px 0 0 10px;
-    padding: 0px 62px 0px 62px;
-    background-color: rgb(136, 136, 136);
-    font-size: x-large;
-    border-radius: 5px;
-    border: rgb(136, 136, 136)
+<!--Starting from Sratch--> {
+    Nothing: nothing;
 }

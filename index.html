@@ -1,43 +1,37 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scael=1,0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./Assets/style.css">
     <title>Weather Dashboard</title>
 </head>
-
 <body>
     <header class="navbar">
         <div>
             <h1>Weather Dashboard</h1>
         </div>
     </header>
-<section class="flex-column justify-space-between">
-    <div class="col-12 col-md-4">
-    <div class="search-box">
-        <h2>Search for a City:</h2>
-        <input type="text" class="search-input" placeholder="City...">
-        <button class="searchBtn">Search</button>
-    </div>
-    </div>
-</section>
-<section class="prefix-cities">
-    <div class="prefix">
-        <button type="text" id="cityBtn">Example</button>
-    </div>
-</section>
-<section class="weather-info">
-    <div class="info-box"></div>
-    <div id="city-name"></div>
-    <div id="city-temp"></div>
-    <div id="city-humidity"></div>
-</section>
-<section class="forecast">
-</section>
 
+    <main>
+    <section class="flex-column justify-space-between">
+        <div class="col-12 col-md-4">
+            <form id="search-box">
+                <input type="text" id="city-input" placeholder="City...">
+                <button type="submit">Search</button>
+            </form>
+<!-- Using a reference HTML template That I liked for the following div-->
+            <div id="current-weather">
+            </div>
 
+            <div id="forecast">
+            </div>
+
+            <div id="prefix-search">
+            </div>
+        </div>
+    </section>
+    </main>
 </body>
-</html>  
+</html>

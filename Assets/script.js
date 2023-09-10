@@ -1,0 +1,1 @@
+//Starting JS from scratch
