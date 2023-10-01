@@ -1,1 +1,1 @@
-//Starting JS from scratch
+/* Restarting As I'd Like to freshly practice and understanding how to make my API Function with JavaScript*/

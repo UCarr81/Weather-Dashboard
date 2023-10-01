@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./Assets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>Weather Dashboard</title>
 </head>
 <body>
@@ -17,21 +18,28 @@
     <main>
     <section class="flex-column justify-space-between">
         <div class="col-12 col-md-4">
-            <form id="search-box">
-                <input type="text" id="city-input" placeholder="City...">
-                <button type="submit">Search</button>
-            </form>
-<!-- Using a reference HTML template That I liked for the following div-->
-            <div id="current-weather">
-            </div>
+            <h2>Search for a City:</h2>
+           <input type="text" id="cityInput" placeholder="Portland, New York, etc">
+           <button id="searchBtn" class="search-btn">Search...</button>
 
+            <div id="city-input"></div>
+<!-- Using a reference HTML template That I liked for the following div-->
+            <div id="weather-info">
+               <h2 id="cityName"></h2>
+               <p id="temperature"></p>
+               <p id="wind"></p>
+               <p id="humidity"></p>
+            </div>
             <div id="forecast">
+                <h2>5 Day Forecast</h2>
+                <div id="forecastList"></div>
             </div>
 
             <div id="prefix-search">
             </div>
         </div>
     </section>
+    <script src="./Assets/script.js"></script>
     </main>
 </body>
 </html>
