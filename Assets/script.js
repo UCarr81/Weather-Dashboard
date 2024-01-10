@@ -1,49 +1,51 @@
 const apiKey = "d4e9f0c9a253b69ab2eeb89bc3cfb9c7";
-const searchForm = document.getElementById("search-form");
+const baseUrl = 'https://api.openweathermap.org/data/2.5/forecast';
 
 // Function to find weather based on city
-function findWeather(city) {
-  let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+//function findWeather(city) {
+ // let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
-  fetch(queryURL)
-    .then((response) => response.json())
-    .then((data) => {
-      // Update the current weather display
-      updateCurrentWeather(data);
 
-      // Save the city to local storage
-      saveToLocalStorage(city);
-    })
-    .catch((err) => {
-      console.error("Uh oh, no weather fetch!", err);
-    });
-}
+function handleFormsubmit(event) {
+  event.preventDefault();
 
-// Function to update the current weather display
-function updateCurrentWeather(data) {
-  document.getElementById('cityName').textContent = data.name;
-  document.getElementById('temperature').textContent = data.main.temp;
-  document.getElementById('wind').textContent = data.wind.speed;
-  document.getElementById('humidity').textContent = data.main.humidity;
-}
+  const cityInput = document.getElementById("cityInput");
+  const cityName = documnet.getElementById("cityName:");
 
-// Function to save city to local storage
-function saveToLocalStorage(city) {
-  // Check if the city already exists in the local storage
-  var cities = JSON.parse(localStorage.getItem("cities")) || [];
-  if (!cities.includes(city)) {
-    // Add the city to the array and save it back to local storage
-    cities.push(city);
-    localStorage.setItem("cities", JSON.stringify(cities));
-    // Call a function to update the list of default city buttons
-    updateDefaultCityButtons();
+  if (cityName != '') {
+    getWeatherData(cityName);
+
+    cityInput.value = '';
   }
 }
 
-// Event listener for the form submission
-document.getElementById("search-form").addEventListener("submit", function (event) {
-  event.preventDefault(); // Prevent the default form submission behavior
-  const cityInput = document.getElementById("cityInput").value;
-  findWeather(cityInput);
-});
 
+
+function getWeatherData(cityName) {
+  const apiURl = `${baseUrl}?q=${cityName}&appid=${apiKey}`;
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      updateCurrentWeather(data);
+      updateForecast(data);
+    })
+    .catch(error => console.error('Data got lost in the mail somewhere IDK', error));
+}
+
+
+function updateCurrentWeather(data) {
+  const currentWeather = document.getElementById('currentWeather');
+  const cityNameElement = document.getElementById('cityName');
+  const temperatureElement = document.getElementById('temperature');
+  const windElement = document.getElementById('wind');
+  const humidityElement = document.getElementById('humidity');
+
+
+  const city = data.city.name;
+  const temperature = data.list[0].main.temp;
+  const windSpeed = data.list[0].wind.speed;
+  const humidity = data.list[0].main.humidity;
+
+  currentWeather.style.display = 'block';
+}
