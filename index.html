@@ -15,32 +15,24 @@
         </div>
     </header>
 
-    <main>
-    <section class="flex-column justify-space-between">
-        <div class="col-12 col-md-4">
-            <h2>Search for a City:</h2>
-           <input type="text" id="cityInput" placeholder="Portland, New York, etc">
-           <button id="searchBtn" class="search-btn">Search...</button>
+<body>
+    <div class="container-fluid bg-dark text-white text center py-2">
+    </div>
 
-            <div id="city-input"></div>
-<!-- Using a reference HTML template That I liked for the following div-->
-            <div id="weather-info">
-               <h2 id="cityName"></h2>
-               <p id="temperature"></p>
-               <p id="wind"></p>
-               <p id="humidity"></p>
-            </div>
-            <div id="forecast">
-                <h2>5 Day Forecast</h2>
-                <div id="forecastList"></div>
-            </div>
-
-            <div id="prefix-search">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+                <form id="search-form">
+                    <div class="form-group">
+                        <label for="cityInput">Search Cities:</label>
+                        <input type="text" class="form-control" id="cityInput" placeholder="City Name..">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
             </div>
         </div>
-    </section>
-</main>
-
+    </div>
+</body>
 
     <script src="./Assets/script.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

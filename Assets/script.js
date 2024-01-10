@@ -1,4 +1,5 @@
 const apiKey = "d4e9f0c9a253b69ab2eeb89bc3cfb9c7";
+const searchForm = document.getElementById("search-form");
 
 function findWeather(city) {
   let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
