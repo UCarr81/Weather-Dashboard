@@ -1,19 +1,20 @@
 const apiKey = "d4e9f0c9a253b69ab2eeb89bc3cfb9c7";
-const baseUrl = 'https://api.openweathermap.org/data/2.5/forecast';
+const baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
 // Function to find weather based on city
 //function findWeather(city) {
  // let queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
 
-function handleFormsubmit(event) {
+function handleFormSubmit(event) {
   event.preventDefault();
 
   const cityInput = document.getElementById("cityInput");
-  const cityName = documnet.getElementById("cityName:");
+  const cityName = cityInput.value;
 
   if (cityName != '') {
     getWeatherData(cityName);
+    get5DayForecast(cityName);
 
     cityInput.value = '';
   }
@@ -22,15 +23,25 @@ function handleFormsubmit(event) {
 
 
 function getWeatherData(cityName) {
-  const apiURl = `${baseUrl}?q=${cityName}&appid=${apiKey}`;
+  const apiURL = `${baseUrl}?q=${cityName}&appid=${apiKey}`;
 
-  fetch(apiUrl)
+  fetch(apiURL)
     .then(response => response.json())
     .then(data => {
       updateCurrentWeather(data);
+    })
+    .catch(error => console.error('Weather got lost in the cloud somewhere IDK', error));
+}
+
+function get5DayForecast(cityName) {
+  const forecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`;
+
+  fetch(forecastURL)
+    .then(response => response.json())
+    .then(data => {
       updateForecast(data);
     })
-    .catch(error => console.error('Data got lost in the mail somewhere IDK', error));
+    .catch(error => console.error('forecast got lost in the cloud somewhere IDK', error));
 }
 
 
@@ -41,11 +52,45 @@ function updateCurrentWeather(data) {
   const windElement = document.getElementById('wind');
   const humidityElement = document.getElementById('humidity');
 
+  const city = data.name;
+  const temperatureKelvin = data.main.temp;
+  const temperatureFahrenheit = (temperatureKelvin - 273.15) * 9/5 + 32;
+  const windSpeed = data.wind.speed;
+  const humidity = data.main.humidity;
 
-  const city = data.city.name;
-  const temperature = data.list[0].main.temp;
-  const windSpeed = data.list[0].wind.speed;
-  const humidity = data.list[0].main.humidity;
+  cityNameElement.textContent = `Current Weather in ${city}`;
+  temperatureElement.textContent = `Temperature: ${temperatureFahrenheit.toFixed(2)} °F`;
+  windElement.textContent = `Wind: ${windSpeed} MPH`;
+  humidityElement.textContent = `Humidity: ${humidity}%`;
 
   currentWeather.style.display = 'block';
 }
+function updateForecast(data) {
+  const forecastContainer = document.getElementById('forecastContainer');
+
+  forecastContainer.innerHTML = '';
+
+  for (let i = 0; i < 5; i++) {
+    const forecast = data.list[i];
+    const date = moment(forecast.dt_txt).format('MM/DD/YYYY');
+    const temperature = forecast.main.temp;
+    const windSpeed = forecast.wind.speed;
+    const humidity = forecast.main.humidity;
+
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    card.innerHTML = `
+            <div class="card-body">
+                <h5 class="card-title">${date}</h5>
+                <p class="card-text">Temperature: ${temperature} °F</p>
+                <p class="card-text">Wind: ${windSpeed} MPH</p>
+                <p class="card-text">Humidity: ${humidity}%</p>
+            </div>
+        `;
+
+        forecastContainer.appendChild(card);
+  }
+}
+
+document.getElementById('search-form').addEventListener('submit', handleFormSubmit);
