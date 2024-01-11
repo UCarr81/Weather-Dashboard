@@ -29,6 +29,7 @@ function getWeatherData(cityName) {
     .then(response => response.json())
     .then(data => {
       updateCurrentWeather(data);
+      get5DayForecast(cityName);
     })
     .catch(error => console.error('Weather got lost in the cloud somewhere IDK', error));
 }
@@ -73,7 +74,8 @@ function updateForecast(data) {
   for (let i = 0; i < 5; i++) {
     const forecast = data.list[i];
     const date = moment(forecast.dt_txt).format('MM/DD/YYYY');
-    const temperature = forecast.main.temp;
+    const temperatureKelvin = forecast.main.temp;
+    const temperatureFahrenheit = (temperatureKelvin - 273.15) * 9/5 + 32;
     const windSpeed = forecast.wind.speed;
     const humidity = forecast.main.humidity;
 
@@ -83,7 +85,7 @@ function updateForecast(data) {
     card.innerHTML = `
             <div class="card-body">
                 <h5 class="card-title">${date}</h5>
-                <p class="card-text">Temperature: ${temperature} °F</p>
+                <p class="card-text">Temperature: ${temperatureFahrenheit.toFixed(2)} °F</p>
                 <p class="card-text">Wind: ${windSpeed} MPH</p>
                 <p class="card-text">Humidity: ${humidity}%</p>
             </div>
